@@ -3,6 +3,6 @@ site_name: BeastApi-Docs
 nav:
     - Home: index.md
     - Overview: overview.md
-    - AkkaHTTP: backend.md
-    - OpenLayers: frontend.md
+    - Backend: backend.md
+    - Frontend: frontend.md
 theme: readthedocs
