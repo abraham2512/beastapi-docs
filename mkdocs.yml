@@ -1,1 +1,8 @@
-site_name: My Docs
+site_name: BeastApi-Docs
+
+nav:
+    - Home: index.md
+    - Overview: overview.md
+    - AkkaHTTP: backend.md
+    - OpenLayers: frontend.md
+theme: readthedocs

@@ -1,6 +1,6 @@
-# Welcome to MkDocs
+# Welcome to Beast API Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Welcome to the documentation of the BEAST API project! 
 
 ## Commands
 
