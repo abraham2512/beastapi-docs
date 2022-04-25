@@ -43,9 +43,11 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href=".">Home</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#project-layout">Project layout</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#additional-documentation">Additional Documentation</a>
     </li>
     </ul>
                 </li>
@@ -87,7 +89,7 @@
               
                 <h1 id="welcome-to-beast-api-documentation">Welcome to Beast API Documentation</h1>
 <p>Welcome to the documentation of the BEAST API project! </p>
-<h2 id="commands">Commands</h2>
+<h2 id="getting-started">Getting Started</h2>
 <ul>
 <li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
 <li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
@@ -95,11 +97,25 @@
 <li><code>mkdocs -h</code> - Print help message and exit.</li>
 </ul>
 <h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+<pre><code>src/
+    main/
+        scala/
+            StartApp.scala  # Main function and entry point to the server.
+            actors  # Contains all the actors
+                Routes.scala       # ScalaDSL routing logic.
+                FileRegistry.scala  # Helper object for the HTTP routing Actor
+                HdfsActor.scala     # Actor for indexing and partitioning of data using BEAST 
+                TileActor.scala     # Actor for rendering tiles on the fly using index 
+            models
+                DataFileDAL.scala   # Relational Mapping for H2 metadata database
+                DataFileDAO.scala
+            Utils
+                JsonFormats.scala
+    resources/
+        application.conf #Configuration File for the server
+pom.xml # Maven dependencies
 </code></pre>
+<h2 id="additional-documentation">Additional Documentation</h2>
               
             </div>
           </div><footer>
@@ -147,5 +163,5 @@ docs/
 
 <!--
 MkDocs version : 1.3.0
-Build Date UTC : 2022-04-25 02:04:41.088959+00:00
+Build Date UTC : 2022-04-25 06:47:40.200867+00:00
 -->

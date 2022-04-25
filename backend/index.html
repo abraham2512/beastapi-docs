@@ -50,6 +50,18 @@
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">AkkaHTTP</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#get-tiles">GET /tiles/</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-files">GET /files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#post-files">POST /files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-filesid">GET /files/{id}</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delete-filesid">DELETE /files/{id}</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -79,7 +91,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="akka-http-endpoints">Akka HTTP Endpoints</h1>
+<h3 id="get-tiles">GET /tiles/</h3>
+<p>Returns pre generated
+tile or generates one on the fly.</p>
+<pre><code>curl http://127.0.0.1:8080/tiles?dataset=&lt;dataset&gt;&amp;z=&lt;Z&gt;&amp;x=&lt;X&gt;&amp;y=&lt;Y&gt; 
+</code></pre>
+<h3 id="get-files">GET /files</h3>
+<p>Return all the files in our server</p>
+<pre><code>curl http://127.0.0.1:8080/files
+
+</code></pre>
+<h3 id="post-files">POST /files</h3>
+<p>Upload the file from URL into our HDFS and update metadata
+in embedded SQL storage</p>
+<pre><code></code></pre>
+<h3 id="get-filesid">GET /files/{id}</h3>
+<p>-&gt; Returns the details of a file</p>
+<pre><code></code></pre>
+<h3 id="delete-filesid">DELETE /files/{id}</h3>
+<p>Deletes the dataset from server</p>
+<pre><code></code></pre>
+<p><img alt="api-design" src="../images/api-design.png" /></p>
               
             </div>
           </div><footer>
