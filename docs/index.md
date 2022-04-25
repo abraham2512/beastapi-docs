@@ -2,7 +2,10 @@
 
 Welcome to the documentation of the BEAST API project! 
 
-## Commands
+
+
+
+## Getting Started
 
 * `mkdocs new [dir-name]` - Create a new project.
 * `mkdocs serve` - Start the live-reloading docs server.
@@ -10,8 +13,21 @@ Welcome to the documentation of the BEAST API project!
 * `mkdocs -h` - Print help message and exit.
 
 ## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+    src/
+        main/
+            scala/
+                StartApp.scala  # Main function and entry point to the server.
+                actors  # Contains all the actors
+                    Routes.scala       # ScalaDSL routing logic.
+                    FileRegistry.scala  # Helper object for the HTTP routing Actor
+                    HdfsActor.scala     # Actor for indexing and partitioning of data using BEAST 
+                    TileActor.scala     # Actor for rendering tiles on the fly using index 
+                models
+                    DataFileDAL.scala   # Relational Mapping for H2 metadata database
+                    DataFileDAO.scala
+                Utils
+                    JsonFormats.scala
+        resources/
+            application.conf #Configuration File for the server
+    pom.xml # Maven dependencies  
+## Additional Documentation
