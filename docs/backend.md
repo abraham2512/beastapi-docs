@@ -1,13 +1,19 @@
 # Akka HTTP Endpoints
 
 
-### GET /tiles/
-Returns pre generated
-tile or generates one on the fly.
+### POST /files 
+Starts the download for a file if it doesnt exist.
+
 ```
-curl -X GET http://127.0.0.1:8080/tiles?dataset=<D>&z=<Z>&x=<X>&y=<Y> 
+curl -X POST http://127.0.0.1:8080/files -d '{"filename": "SafetyDept","filetype": "shapefile","filesource": "/some/path/to/file","filestatus": "start"}'
 ```
-Returns a tile image for the dataset D with coordinates Z, X, Y
+Sample Response
+```
+Status 201 - Created
+{
+	"description": "created"
+}
+```
 
 ### GET /files 
 
@@ -35,19 +41,7 @@ Status 200 - OK
 	]
 }
 ```
-### POST /files 
-Starts the download for a file if it doesnt exist.
 
-```
-curl -X POST http://127.0.0.1:8080/files -d '{"filename": "SafetyDept","filetype": "shapefile","filesource": "/some/path/to/file","filestatus": "start"}'
-```
-Sample Response
-```
-Status 201 - Created
-{
-	"description": "created"
-}
-```
 
 ### GET /files/{id}  
 Returns the details of a file
@@ -76,3 +70,10 @@ Status 200 - OK
 	"description": "deleted"
 }
 ```
+### GET /tiles/
+Returns pre generated
+tile or generates one on the fly.
+```
+curl -X GET http://127.0.0.1:8080/tiles?dataset=<D>&z=<Z>&x=<X>&y=<Y> 
+```
+Returns a tile image for the dataset D with coordinates Z, X, Y

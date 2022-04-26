@@ -9,6 +9,7 @@ Welcome to the documentation of the BEAST API Project!
 
 * The project requires JDK v1.8 and Spark v3.0.1 for the [BEAST](https://bitbucket.org/bdlabucr/beast/src/master/) library, ensure `SPARK_HOME` and `JAVA_HOME` are in path.
 * Pull the repository using `git clone git@github.com:abraham2512/beasttools-maven.git`
+* Maven is used to compile dependencies and launch the project
 * Compile the project using IntelliJ with compile-time dependencies and run with StartApp as main class
  
 
