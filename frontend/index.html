@@ -54,6 +54,28 @@
               </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Frontend</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#start-your-own-front-end">Start your own front-end</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#clone-beast-viz">Clone Beast Viz</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#setup-the-interface">Setup the interface</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#indexjs">index.js</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#function-launchmapfilename">function launchMap(filename)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-handledatafilesubmitevent">function handleDataFileSubmit(event)</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#function-appendcarddivfilename">function appendCardDiv(filename)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#indexhtml">index.html</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                 </li>
               </ul>
       </div>
@@ -79,7 +101,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                
+                <h1 id="maps-interface">Maps Interface</h1>
+<p>The interface is built with <a href="https://openlayers.org">OpenLayers</a> and JavaScript.  </p>
+<h2 id="start-your-own-front-end">Start your own front-end</h2>
+<p>OpenLayers.js can be imported as a browser script but modern JavaScript works best when using and authoring modules. 
+The recommended way of using OpenLayers is installing the ol package. This can be done through node using the command <code>npx create-ol-app</code>. 
+For more information, see the guide <a href="https://openlayers.org/en/latest/doc/tutorials/bundle.html">here</a></p>
+<h2 id="clone-beast-viz">Clone Beast Viz</h2>
+<p>To clone the default front-end, run this command to clone the repository
+<code>git clone git@github.com:abraham2512/beasttools-maven.git</code> and open the frontend/beastol/ project folder.
+The project has <strong>index.js</strong>, <strong>index.html</strong>, <strong>styles.css</strong> and a <strong>package.json</strong> configuration file.</p>
+<h3 id="setup-the-interface">Setup the interface</h3>
+<ul>
+<li>First install node modules from package.json with <code>npm install</code>. </li>
+<li>For development run the server using <code>npm run start</code>.</li>
+<li>For deployment bundle the files using <code>npm run build</code> to create one <strong>index.html</strong> file that can be served.</li>
+</ul>
+<h3 id="indexjs">index.js</h3>
+<h6 id="function-launchmapfilename">function launchMap(filename)</h6>
+<pre><code>:Creates a map with the filename ID. 
+:Makes GET request to /tiles/ endpoint in backend with dataset = {filename} and {Z}, {X}, {Y} values.
+</code></pre>
+<h6 id="function-handledatafilesubmitevent">function handleDataFileSubmit(event)</h6>
+<pre><code>:Handles form submit with data json.
+:Makes POST request to /files/ endpoint with data payload. This triggers partitioning and indexing of data.
+</code></pre>
+<h6 id="function-appendcarddivfilename">function appendCardDiv(filename)</h6>
+<pre><code>:Appends a new Card for the dataset in the UI to track its progress and launch when ready.
+</code></pre>
+<h3 id="indexhtml">index.html</h3>
+<p>This file imports the index.js module and contains the main html.</p>
               
             </div>
           </div><footer>

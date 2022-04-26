@@ -95,24 +95,65 @@
 <h3 id="get-tiles">GET /tiles/</h3>
 <p>Returns pre generated
 tile or generates one on the fly.</p>
-<pre><code>curl http://127.0.0.1:8080/tiles?dataset=&lt;dataset&gt;&amp;z=&lt;Z&gt;&amp;x=&lt;X&gt;&amp;y=&lt;Y&gt; 
+<pre><code>curl -X GET http://127.0.0.1:8080/tiles?dataset=&lt;D&gt;&amp;z=&lt;Z&gt;&amp;x=&lt;X&gt;&amp;y=&lt;Y&gt; 
 </code></pre>
+<p>Returns a tile image for the dataset D with coordinates Z, X, Y</p>
 <h3 id="get-files">GET /files</h3>
 <p>Return all the files in our server</p>
-<pre><code>curl http://127.0.0.1:8080/files
-
+<pre><code>curl -X GET http://127.0.0.1:8080/files
+</code></pre>
+<p>Sample Response</p>
+<pre><code>Status 200 - OK
+{
+    &quot;files&quot;: [
+        {
+            &quot;filename&quot;: &quot;SafetyDept&quot;,
+            &quot;filesource&quot;: &quot;/some/path/to/file&quot;,
+            &quot;filestatus&quot;: &quot;indexed&quot;,
+            &quot;filetype&quot;: &quot;default&quot;
+        },
+        {
+            &quot;filename&quot;: &quot;Sections&quot;,
+            &quot;filesource&quot;: &quot;/some/path/to/file&quot;,
+            &quot;filestatus&quot;: &quot;indexed&quot;,
+            &quot;filetype&quot;: &quot;shapefile&quot;
+        }
+    ]
+}
 </code></pre>
 <h3 id="post-files">POST /files</h3>
-<p>Upload the file from URL into our HDFS and update metadata
-in embedded SQL storage</p>
-<pre><code></code></pre>
+<p>Starts the download for a file if it doesnt exist.</p>
+<pre><code>curl -X POST http://127.0.0.1:8080/files -d '{&quot;filename&quot;: &quot;SafetyDept&quot;,&quot;filetype&quot;: &quot;shapefile&quot;,&quot;filesource&quot;: &quot;/some/path/to/file&quot;,&quot;filestatus&quot;: &quot;start&quot;}'
+</code></pre>
+<p>Sample Response</p>
+<pre><code>Status 201 - Created
+{
+    &quot;description&quot;: &quot;created&quot;
+}
+</code></pre>
 <h3 id="get-filesid">GET /files/{id}</h3>
-<p>-&gt; Returns the details of a file</p>
-<pre><code></code></pre>
+<p>Returns the details of a file</p>
+<pre><code>curl -X GET http://127.0.0.1:8080/files/SafetyDept
+</code></pre>
+<p>Sample Response</p>
+<pre><code>Status 200 - OK
+{
+    &quot;filename&quot;: &quot;SafetyDept&quot;,
+    &quot;filesource&quot;: &quot;/some/path/to/file&quot;,
+    &quot;filestatus&quot;: &quot;indexed&quot;,
+    &quot;filetype&quot;: &quot;shapefile&quot;
+}
+</code></pre>
 <h3 id="delete-filesid">DELETE /files/{id}</h3>
 <p>Deletes the dataset from server</p>
-<pre><code></code></pre>
-<p><img alt="api-design" src="../images/api-design.png" /></p>
+<pre><code>curl -X DELETE http://127.0.0.1:8080/files/SafetyDept
+</code></pre>
+<p>Sample Response</p>
+<pre><code>Status 200 - OK
+{
+    &quot;description&quot;: &quot;deleted&quot;
+}
+</code></pre>
               
             </div>
           </div><footer>
