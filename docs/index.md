@@ -26,7 +26,7 @@ Welcome to the documentation of the BEAST API Project!
                 models
                     DataFileDAL.scala   # Relational Mapping for H2 metadata database
                     DataFileDAO.scala
-                Utils
+                utils
                     JsonFormats.scala
         resources/
             application.conf #Configuration File for the server
