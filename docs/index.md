@@ -1,16 +1,16 @@
 # Welcome to Beast API Documentation
 
-Welcome to the documentation of the BEAST API project! 
+Welcome to the documentation of the BEAST API Project! 
 
 
 
 
-## Getting Started
+## Getting Started to Develop!
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+* The project requires JDK v1.8 and Spark v3.0.1 for the [BEAST](https://bitbucket.org/bdlabucr/beast/src/master/) library, ensure `SPARK_HOME` and `JAVA_HOME` are in path.
+* Pull the repository using `git clone git@github.com:abraham2512/beasttools-maven.git`
+* Compile the project using IntelliJ with compile-time dependencies and run with StartApp as main class
+ 
 
 ## Project layout
     src/
@@ -29,5 +29,14 @@ Welcome to the documentation of the BEAST API project!
                     JsonFormats.scala
         resources/
             application.conf #Configuration File for the server
-    pom.xml # Maven dependencies  
+    pom.xml # Maven dependencies
+
+## Building 
+Maven-shade-plugin is used to build into a Uber JAR using `mvn clean package` <br>
+The Uber Jar with all dependencies can be deployed on Spark with `spark-submit`  
+*Build dependenices not clean/working at the time of writing*. 
+    
 ## Additional Documentation
+- [Beast Documentation](https://bitbucket.org/bdlabucr/beast/src/master/)
+- [AkkaHTTP Documentation](https://doc.akka.io/docs/akka-http/current/index.html)
+- [Akka Concurrency by Derek Wyatt](https://www.artima.com/shop/akka_concurrency) - A great book that runs through the basics of Akka!

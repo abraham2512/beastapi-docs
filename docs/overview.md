@@ -5,9 +5,11 @@ There were a few design considerations and AkkaHTTP was deemed a good fit for th
 
 
 
-AkkaHTTP was chosen
-Concurrency through message passing (Actors)
-Non-blocking by default (Futures)
-Fault Tolerance (a.k.a. Resiliency, ‘let it crash’ model) 
+AkkaHTTP was chosen because 
+- Concurrency through message passing (Actors)
+- Non-blocking by default (Futures)
+- Fault Tolerance (a.k.a. Resiliency, ‘let it crash’ model) 
+
+#TALK MORE ABOUT AKKA HERE
 
 ![api-design](images/api-design.png) 
