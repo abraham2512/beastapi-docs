@@ -47,6 +47,10 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Overview</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#current-architecture-design">Current Architecture design</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-akka-actorcontext-and-behaviors">Using Akka ActorContext and Behaviors</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -83,13 +87,17 @@
               
                 <h1 id="beast-microservice">Beast Microservice</h1>
 <p>The microservice backend is to enable upload and processing of Spatial-Temporal data files on the Hadoop using Spark and BEAST library. </p>
-<p>There were a few design considerations and AkkaHTTP was deemed a good fit for the API. It is a lightweight but feature-rich and highly scalable toolkit for building API endpoints based on the Actor Model.</p>
+<p>There were a few design considerations and AkkaHTTP was deemed a good fit for the API. It is a lightweight but feature-rich and highly scalable toolkit for building API endpoints based on the Actor Model. </p>
 <p>AkkaHTTP was chosen because 
 - Concurrency through message passing (Actors)
 - Non-blocking by default (Futures)
 - Fault Tolerance (a.k.a. Resiliency, ‘let it crash’ model) </p>
-<h1 id="talk-more-about-akka-here">TALK MORE ABOUT AKKA HERE</h1>
+<h3 id="current-architecture-design">Current Architecture design</h3>
 <p><img alt="api-design" src="../images/api-design.png" /> </p>
+<h3 id="using-akka-actorcontext-and-behaviors">Using Akka ActorContext and Behaviors</h3>
+<p>A Scala object can be made into an Akka actor simply by importing these two libraries
+ - <code>akka.actor.typed.scaladsl.ActorContext</code>
+ - <code>akka.actor.typed.scaladsl.Behaviors</code></p>
               
             </div>
           </div><footer>
