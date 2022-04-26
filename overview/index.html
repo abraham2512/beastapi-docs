@@ -112,6 +112,7 @@
 <p>A Scala object can be made into an Akka actor simply by importing <code>akka.actor.typed.scaladsl.ActorContext</code> and <code>akka.actor.typed.scaladsl.Behaviors</code> into your scala object. Use <code>Behaviours.setup</code> to create a match case for <code>ActorContext</code>. Any message passed to this actor will be processed depending on its match case.</p>
 <p>A simple example would be</p>
 <pre><code>object MyActor{
+
     def apply(): Behavior[CommandTrait] = Behaviors.setup {
     context: ActorContext[CommandTrait] =&gt;
       println(&quot;actors.HdfsRegistry: Hdfs Actor awake&quot;)
@@ -122,10 +123,11 @@
           println(s&quot;actors.HdfsActor: got a msg: $msg&quot;)
           Behaviors.same
         case _ =&gt;
-          println(&quot;Default Case)
+          println(&quot;Default Case&quot;)
           Behaviors.same
       }
 
+    }
 }
 
 </code></pre>
