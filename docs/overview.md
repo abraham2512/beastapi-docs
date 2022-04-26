@@ -29,6 +29,7 @@ A simple example would be
 
 ```
 object MyActor{
+
     def apply(): Behavior[CommandTrait] = Behaviors.setup {
     context: ActorContext[CommandTrait] =>
       println("actors.HdfsRegistry: Hdfs Actor awake")
@@ -39,10 +40,11 @@ object MyActor{
           println(s"actors.HdfsActor: got a msg: $msg")
           Behaviors.same
         case _ =>
-          println("Default Case)
+          println("Default Case")
           Behaviors.same
       }
 
+    }
 }
 
 ```
