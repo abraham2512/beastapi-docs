@@ -13,7 +13,7 @@ Welcome to the documentation of the BEAST API Project!
 * Compile the project using IntelliJ with compile-time dependencies and run with StartApp as main class
  
 
-## Project layout
+### Project layout
     src/
         main/
             scala/
@@ -32,8 +32,10 @@ Welcome to the documentation of the BEAST API Project!
             application.conf #Configuration File for the server
     pom.xml # Maven dependencies
 
-## Building 
-Maven-shade-plugin is used to build into a Uber JAR using `mvn clean package` <br>
+### Building 
+Maven-shade-plugin is used to build into a Uber JAR using `mvn clean package` 
+
+### Deploying
 The Uber Jar with all dependencies can be deployed on Spark with `spark-submit`  
 *Build dependenices not clean/working at the time of writing*. 
     
