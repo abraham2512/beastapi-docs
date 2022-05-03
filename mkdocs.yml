@@ -5,4 +5,5 @@ nav:
     - Overview: overview.md
     - Backend: backend.md
     - Frontend: frontend.md
+    - /meta/ Example: api_example.md
 theme: readthedocs

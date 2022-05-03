@@ -21,7 +21,7 @@ The actors can be deployed and scaled horizontally into the cluster using the Ak
 
 ![api-design](images/api-design.png) 
 
-### Using Akka ActorContext and Behaviors
+<!-- ### Using Akka ActorContext and Behaviors
 
 A Scala object can be made into an Akka actor simply by importing `akka.actor.typed.scaladsl.ActorContext` and `akka.actor.typed.scaladsl.Behaviors` into your scala object. Use `Behaviours.setup` to create a match case for `ActorContext`. Any message passed to this actor will be processed depending on its match case.
 
@@ -53,3 +53,4 @@ For the Actor to be visible to other actors in the server, we can register it to
 ```
 context.system.receptionist ! Receptionist.Register("KeyForNewActor", context.self)
 ```
+ -->
