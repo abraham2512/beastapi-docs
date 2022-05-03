@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Backend - BeastApi-Docs</title>
+    <title>/meta/ Example - BeastApi-Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Backend";
-        var mkdocs_page_input_path = "backend.md";
+        var mkdocs_page_name = "/meta/ Example";
+        var mkdocs_page_input_path = "api_example.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -48,28 +48,22 @@
                 <li class="toctree-l1"><a class="reference internal" href="../overview/">Overview</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Backend</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#post-files">POST /files</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-files">GET /files</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-filesid">GET /files/{id}</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#delete-filesid">DELETE /files/{id}</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-tiles">GET /tiles/</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../backend/">Backend</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../frontend/">Frontend</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../api_example/">/meta/ Example</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">/meta/ Example</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#routesscala">Routes.scala</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tileactorscala">TileActor.scala</a>
+    </li>
+    </ul>
                 </li>
               </ul>
       </div>
@@ -85,7 +79,7 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Backend</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>/meta/ Example</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -95,75 +89,70 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="akka-http-endpoints">Akka HTTP Endpoints</h1>
-<h3 id="post-files">POST /files</h3>
-<p>Starts the download for a file if it doesnt exist.</p>
-<pre><code>curl -X POST http://127.0.0.1:8080/files -d '{&quot;filename&quot;: &quot;SafetyDept&quot;,&quot;filetype&quot;: &quot;shapefile&quot;,&quot;filesource&quot;: &quot;/some/path/to/file&quot;,&quot;filestatus&quot;: &quot;start&quot;}'
+                <h2 id="adding-a-new-feature">Adding a new feature</h2>
+<p>In this section, we will create a test endpoint named "/meta" to return a string for a GET request.</p>
+<h4 id="routesscala">Routes.scala</h4>
+<p>This file contains the akkaHTTP routing logic and also extends the FileRegistry Actor. </p>
+<p>1.Lets declare the controller method in the class Routes. </p>
+<pre><code>def getMeta: Future[String] =
+  tileActor ? GetMetaData
 </code></pre>
-<p>Sample Response</p>
-<pre><code>Status 201 - Created
-{
-    &quot;description&quot;: &quot;created&quot;
-}
-</code></pre>
-<h3 id="get-files">GET /files</h3>
-<p>Return all the files in our server</p>
-<pre><code>curl -X GET http://127.0.0.1:8080/files
-</code></pre>
-<p>Sample Response</p>
-<pre><code>Status 200 - OK
-{
-    &quot;files&quot;: [
-        {
-            &quot;filename&quot;: &quot;SafetyDept&quot;,
-            &quot;filesource&quot;: &quot;/some/path/to/file&quot;,
-            &quot;filestatus&quot;: &quot;indexed&quot;,
-            &quot;filetype&quot;: &quot;default&quot;
-        },
-        {
-            &quot;filename&quot;: &quot;Sections&quot;,
-            &quot;filesource&quot;: &quot;/some/path/to/file&quot;,
-            &quot;filestatus&quot;: &quot;indexed&quot;,
-            &quot;filetype&quot;: &quot;shapefile&quot;
+<p>Sends GetMetaData message to the Tile Actor. 
+<code>?</code> is the operator to ask an actor, and it expects an asynchronous reply.
+The return type of the function is a <code>Future</code> of type <code>[String]</code></p>
+<p>2.Append akkaHTTP routing directive in var fileRoutes  </p>
+<p>Add the route with the below syntax. Ensure to use ~ at the end to append underlying route directives. </p>
+<pre><code>val fileRoutes: Route = {
+  ...
+  ...
+  ... CORS and Failure Handling functions
+  ...
+cors(){
+  handleErrors {
+    pathPrefix(&quot;meta&quot;)
+      {
+        pathEnd {
+          get{
+            complete(StatusCodes.OK,getMeta)
+          }
         }
-    ]
+      } ~
+  ...
+  ...
+  ... &quot;/tiles/&quot; and &quot;/files/&quot; endpoints
+  ...
+    }
+  }
 }
 </code></pre>
-<h3 id="get-filesid">GET /files/{id}</h3>
-<p>Returns the details of a file</p>
-<pre><code>curl -X GET http://127.0.0.1:8080/files/SafetyDept
+<h4 id="tileactorscala">TileActor.scala</h4>
+<p>3.Now lets define a behaviour for the GetMetaData message in the TileActor</p>
+<p>In the <code>TileActor</code> object, create case class for the behavior and extend TileCommand trait.</p>
+<pre><code>final case class GetMetaData(replyTo: ActorRef[String]) extends TileCommand
 </code></pre>
-<p>Sample Response</p>
-<pre><code>Status 200 - OK
-{
-    &quot;filename&quot;: &quot;SafetyDept&quot;,
-    &quot;filesource&quot;: &quot;/some/path/to/file&quot;,
-    &quot;filestatus&quot;: &quot;indexed&quot;,
-    &quot;filetype&quot;: &quot;shapefile&quot;
+<p>4.In the apply() method of the object, add the following case to <code>Behaviors.ReceiveMessage {}</code> method </p>
+<pre><code>def apply(): Behavior[TileCommand] = Behaviors.setup {
+    context: ActorContext[TileCommand] =&gt; Behaviors.receiveMessage {
+        case GetMetaData(replyTo) =&gt;
+            //GET METADATA
+            replyTo ! &quot;My new BeastApi endpoint!&quot;
+            Behaviors.same
+    }
 }
 </code></pre>
-<h3 id="delete-filesid">DELETE /files/{id}</h3>
-<p>Deletes the dataset from server</p>
-<pre><code>curl -X DELETE http://127.0.0.1:8080/files/SafetyDept
+<p>Lets run a curl test</p>
+<pre><code>curl http://localhost:8080/meta
 </code></pre>
-<p>Sample Response</p>
-<pre><code>Status 200 - OK
-{
-    &quot;description&quot;: &quot;deleted&quot;
-}
+<p>Response:</p>
+<pre><code>Status 200
+
+My new BeastApi endpoint!
 </code></pre>
-<h3 id="get-tiles">GET /tiles/</h3>
-<p>Returns pre generated
-tile or generates one on the fly.</p>
-<pre><code>curl -X GET http://127.0.0.1:8080/tiles?dataset=&lt;D&gt;&amp;z=&lt;Z&gt;&amp;x=&lt;X&gt;&amp;y=&lt;Y&gt; 
-</code></pre>
-<p>Returns a tile image for the dataset D with coordinates Z, X, Y</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../overview/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../frontend/" class="btn btn-neutral float-right" title="Frontend">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../frontend/" class="btn btn-neutral float-left" title="Frontend"><span class="icon icon-circle-arrow-left"></span> Previous</a>
     </div>
 
   <hr/>
@@ -186,10 +175,8 @@ tile or generates one on the fly.</p>
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../overview/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../frontend/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../frontend/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
