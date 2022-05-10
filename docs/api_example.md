@@ -1,5 +1,5 @@
 
-## Adding a new feature
+## Adding a new feature - API endpoint
 
 In this section, we will create a test endpoint named "/meta" to return a string for a GET request.
 

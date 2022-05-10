@@ -5,5 +5,7 @@ nav:
     - Overview: overview.md
     - Backend: backend.md
     - Frontend: frontend.md
-    - /meta/ Example: api_example.md
+    - Example1 /meta/: api_example.md
+    - Example2 OL event: ol_example.md
+    - Example3 Accessing H2DB: h2db_example.md
 theme: readthedocs
